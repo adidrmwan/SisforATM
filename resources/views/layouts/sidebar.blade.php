@@ -7,7 +7,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-          <a href="#">
+          <a href="single">
              <span>Single House</span>
           </a>
         </li>

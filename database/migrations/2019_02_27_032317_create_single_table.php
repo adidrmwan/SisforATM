@@ -15,15 +15,17 @@ class CreateSingleTable extends Migration
     {
         Schema::create('single', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('id_atm');
-            $table->string('lokasi');
-            $table->string('pengelola');
-            $table->string('denom');
-            $tsble->string('');
-            $table->string('');
-            $table->string('');
-            $table->string('');
-            $table->date('bulan');
+            $table->string('id_atm')->nullable();
+            $table->string('lokasi')->nullable();
+            $table->string('pengelola')->nullable();
+            $table->date('jatuh_tempo')->nullable();
+            $table->string('denom')->nullable();
+            $table->string('performance')->nullable();
+            $table->string('transaksi')->nullable();
+            $table->string('feebased')->nullable();
+            $table->string('ac')->nullable();
+            $table->string('cctv')->nullable();
+            $table->date('tanggal')->nullable();
             $table->timestamps();
         });
     }

@@ -3,8 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Session;
+use Excel;
+use File;
+use App\Single;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 
-class SingleConntroller extends Controller
+class SingleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +20,8 @@ class SingleConntroller extends Controller
      */
     public function index()
     {
-        //
+        $listsingle = Single::all();
+        return view('single.index',compact('listsingle'));
     }
 
     /**
@@ -80,5 +88,31 @@ class SingleConntroller extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function singleImport(Request $request) {
+        if ($request->hasFile('file')) {
+            $path = $request->file('file')->getRealPath();
+            $data = Excel::load($path, function($reader){})->get();
+
+            if(!empty($data) && $data->count()) {
+                foreach ($data as $key => $value) {
+                    $single = new Single();
+                    $single->id_atm = $value->id_atm;
+                    $single->lokasi = $value->lokasi;
+                    $single->pengelola = $value->pengelola;
+                    $single->jatuh_tempo = $value->jatuh_tempo;
+                    $single->denom = $value->denom;
+                    $single->performance = $value->performance;
+                    $single->transaksi = $value->transaksi;
+                    $single->feebased = $value->feebased;
+                    $single->ac = $value->ac;
+                    $single->cctv = $value->cctv;
+                    $single->tanggal = $value->tanggal;
+                    $single->save();
+                }
+            }
+        }
+        return back();
     }
 }

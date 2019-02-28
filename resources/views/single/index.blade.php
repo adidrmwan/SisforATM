@@ -14,10 +14,10 @@
             <h3 class="box-title">Upload Performance</h3>
           </div>
           <div style="padding: 10px;">
-              <form action="{{route('performance.import')}}" method="POST" enctype="multipart/form-data">
+              <form action="{{route('single.import')}}" method="POST" enctype="multipart/form-data">
                   {{ csrf_field() }}
                 
-                  Choose your xls/csv File : 
+                  Choose your File : 
                   <input type="file" name="file" class="form-control" id="file">
                   <input type="submit" class="btn btn-primary btn-lg" style="margin-top: 3%;" value="upload" >
               </form>
@@ -41,33 +41,32 @@
                 <th>No</th>
                 <th>ID ATM</th>
                 <th>LOKASI</th>
-                 <th>AREA</th>
                 <th>PENGELOLA</th>
-                 <th>JENIS LOKASI</th>
-                <th>JENIS MESIN</th>
-                 <th>DENOM</th>
-                <th>ITEM</th>
-                 <th>VOLUME</th>
+                <th>JATUH TEMPO</th>
+                <th>DENOM</th>
+                <th>PERFORMANCE</th>
+                <th>TRANSAKSI</th>
                 <th>FEEBASED</th>
-                 <th>KUADRAN</th>
+                <th>AC</th>
+                <th>CCTV</th>
+                <th>TANGGAL</th>
               </tr>
               </thead>
               <tbody>
-             @foreach($performfeb as $key => $data)
+              @foreach($listsingle as $key => $data)
               <tr>
                 <td>{{$key + 1}}</td>
                 <td>{{$data->id_atm}}</td>
                 <td>{{$data->lokasi}}</td>
-                <td>{{$data->area}}</td>
                 <td>{{$data->pengelola}}</td>
-                <td>{{$data->jenis_lokasi}}</td>
-                <td>{{$data->jenis_mesin}}</td>
+                <td>{{$data->jatuh_tempo}}</td>
                 <td>{{$data->denom}}</td>
-                <td>{{$data->item}}</td>
-                <td>{{$data->volume}}</td>
+                <td>{{$data->performance}}</td>
+                <td>{{$data->transaksi}}</td>
                 <td>{{$data->feebased}}</td>
-                <td>{{$data->kuadran}}</td>
-
+                <td>{{$data->ac}}</td>
+                <td>{{$data->cctv}}</td>
+                <td>{{$data->tanggal}}</td>
               </tr>
               @endforeach
               </tbody>
