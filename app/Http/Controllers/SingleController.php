@@ -115,4 +115,13 @@ class SingleController extends Controller
         }
         return back();
     }
+
+    public function singleChart()
+      {
+        $result = \DB::table('single')
+                    ->where('id_atm','=','Infosys')
+                    ->orderBy('tanggal', 'ASC')
+                    ->get();
+        return response()->json($result);
+      }
 }

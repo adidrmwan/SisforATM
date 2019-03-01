@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('single','SingleController');
 Route::post('import', 'SingleController@singleImport')->name('single.import');
+Route::get('single/chart', 'SingleController@singleChart');
