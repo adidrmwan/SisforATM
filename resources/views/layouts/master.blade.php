@@ -234,7 +234,7 @@
 <script src="{{URL::asset('assets/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{URL::asset('assets/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="{{URL::asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{URL::asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <!-- SlimScroll -->
@@ -262,41 +262,49 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script>
-<script>
-var url = "{{url('single/chart')}}";
-var Dates = new Array();
-var Labels = new Array();
-var Transactions= new Array();
-$(document).ready(function(){
-  $.get(url, function(response){
-    response.forEach(function(data){
-        Dates.push(data.tanggal);
-        Labels.push(data.id_atm);
-        Transactions.push(data.transaksi);
-    });
-    var ctx = document.getElementById("canvas").getContext('2d');
-        var myChart = new Chart(ctx, {
-          type: 'bar',
-          data: {
-              labels:Dates,
-              datasets: [{
-                  label: 'Infosys Price',
-                  data: Transactions,
-                  borderWidth: 1
-              }]
-          },
-          options: {
-              scales: {
-                  yAxes: [{
-                      ticks: {
-                          beginAtZero:true
-                      }
-                  }]
-              }
-          }
-      });
-  });
+
+<script type="text/javascript">
+  Highcharts.chart('singleChart', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Transaksi ATM'
+    },
+    subtitle: {
+        text: 'BANK MANDIRI'
+    },
+    xAxis: {
+        categories: {!!json_encode($categories)!!},
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Transaksi'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>Rp {point.y:.1f}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Single House',
+        data: {!!json_encode($total_transaksi)!!}
+
+    }]
 });
 </script>
+
 </body>
 </html>

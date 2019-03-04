@@ -20,8 +20,35 @@ class SingleController extends Controller
      */
     public function index()
     {
-        $listsingle = Single::all();
-        return view('single.index',compact('listsingle'));
+        $listSingle = Single::all();
+        // return view('single.index',compact('listSingle'));
+
+        $tranSingle = Single::select(
+            DB::raw('sum(transaksi) as total'),
+            DB::raw("date_format(tanggal, '%M %Y') as months")
+        )
+        ->groupBy('months')
+        ->get();
+
+        $categories = [];
+        $total_transaksi = [];
+        
+         foreach ($tranSingle as $sg) {
+            $categories[] = $sg->months;
+            $total_transaksi[] = $sg->total;
+
+        }
+
+        // dd(json_encode($categories) );
+        return view('single.index', compact('listSingle','tranSingle', 'categories', 'total_transaksi'));
+    }
+
+    public function chartIndex()
+    {
+
+
+        
+        
     }
 
     /**
