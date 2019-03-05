@@ -28,19 +28,20 @@ class SingleController extends Controller
             DB::raw("date_format(tanggal, '%M %Y') as months")
         )
         ->groupBy('months')
+        ->orderBy('tanggal','asc')
         ->get();
 
-        $categories = [];
+        $kategori = [];
         $total_transaksi = [];
         
          foreach ($tranSingle as $sg) {
-            $categories[] = $sg->months;
+            $kategori[] = $sg->months;
             $total_transaksi[] = $sg->total;
 
         }
 
-        // dd(json_encode($categories) );
-        return view('single.index', compact('listSingle','tranSingle', 'categories', 'total_transaksi'));
+        // dd(json_encode($kategori));
+        return view('single.index', ['listSingle' => $listSingle, 'tranSingle' => $tranSingle, 'kategori' => $kategori, 'total_transaksi' =>$total_transaksi]);
     }
 
     public function chartIndex()

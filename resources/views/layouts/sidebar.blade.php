@@ -12,17 +12,17 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="center">
              <span>ATM Center</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="pooling">
              <span>Pooling</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="drive">
              <span>Drive Thru</span>
           </a>
         </li>
