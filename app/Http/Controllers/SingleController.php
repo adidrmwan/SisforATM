@@ -41,7 +41,7 @@ class SingleController extends Controller
         }
 
         // dd(json_encode($kategori));
-        return view('single.index', ['listSingle' => $listSingle, 'tranSingle' => $tranSingle, 'kategori' => $kategori, 'total_transaksi' =>$total_transaksi]);
+        return view('single.index', ['listSingle' => $listSingle, 'tranSingle' => $tranSingle, 'kategori' => $kategori, 'total_transaksi' => $total_transaksi]);
     }
 
     public function chartIndex()
@@ -144,12 +144,4 @@ class SingleController extends Controller
         return back();
     }
 
-    public function singleChart()
-      {
-        $result = \DB::table('single')
-                    ->where('id_atm','=','Infosys')
-                    ->orderBy('tanggal', 'ASC')
-                    ->get();
-        return response()->json($result);
-      }
 }

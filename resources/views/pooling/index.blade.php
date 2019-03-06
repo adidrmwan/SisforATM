@@ -1,4 +1,4 @@
-@extends('layouts.master-home')
+@extends('layouts.master')
 
 @section('content')
 <div class="content-wrapper">

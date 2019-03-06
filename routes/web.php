@@ -17,17 +17,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::resource('single','SingleController');
-Route::post('import', 'SingleController@singleImport')->name('single.import');
+Route::post('import/single', 'SingleController@singleImport')->name('single.import');
 // Route::get('single', 'SingleController@chartIndex');
 
 Route::resource('pooling','poolingController');
 // Route::post('import', 'SingleController@poolingImport')->name('pooling.import');
 
 Route::resource('center','centerController');
-// Route::post('import', 'SingleController@centerImport')->name('center.import');
+Route::post('import/center', 'centerController@centerImport')->name('center.import');
 
 Route::resource('drive','driveController');
 // Route::post('import', 'SingleController@driveImport')->name('drive.import');
+

@@ -92,3 +92,56 @@
   </section>
 </div>
 @endsection
+
+
+@section('chartSingleScript')
+<script type="text/javascript">
+  Highcharts.chart('singleChart', {
+    dateRangeGrouping: true,
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Transaksi ATM'
+    },
+    subtitle: {
+        text: 'BANK MANDIRI'
+    },
+    credits: {
+        enabled: false
+    },
+    xAxis: {
+        dateTimeLabelFormats:{
+            month: '%b %e, %Y'
+          },
+        categories: {!!json_encode($kategori)!!},
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Transaksi'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>Rp {point.y:.1f}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Single House',
+        data: {!!json_encode($total_transaksi)!!}
+
+    }]
+});
+</script>
+@stop
