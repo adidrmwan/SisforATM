@@ -26,6 +26,11 @@
              <span>Drive Thru</span>
           </a>
         </li>
+        <li>
+          <a href="atm">
+             <span>ATM</span>
+          </a>
+        </li>
         <!-- <li class="treeview">
         <a href="#"><i class="fa fa-link"></i> <span>Performance</span>
               <span class="pull-right-container">

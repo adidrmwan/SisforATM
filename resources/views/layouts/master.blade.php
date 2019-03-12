@@ -20,6 +20,7 @@
 @include('layouts.script')
 @yield('chartSingleScript')
 @yield('chartCenterScript')
+@yield('chartAtmScript')
 @yield('chartHome')
 </body>
 </html>

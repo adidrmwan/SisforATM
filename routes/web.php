@@ -32,3 +32,5 @@ Route::post('import/center', 'centerController@centerImport')->name('center.impo
 Route::resource('drive','driveController');
 // Route::post('import', 'SingleController@driveImport')->name('drive.import');
 
+Route::resource('atm','AtmController');
+Route::post('import/atm', 'AtmController@atmImport')->name('atm.import');
