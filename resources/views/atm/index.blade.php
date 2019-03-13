@@ -45,6 +45,11 @@
                 <th>Area</th>
                 <th>Type Lokasi</th>
                 <th>Tanggal</th>
+                <th>Denom</th>
+                <th>Item</th>
+                <th>Volume</th>
+                <th>Feebased</th>
+                <th>Kuadran</th>
               </tr>
               </thead>
               <tbody>
@@ -57,6 +62,11 @@
                   <td>{{$data->area}}</td>
                   <td>{{$data->tipe}}</td>
                   <td>{{$data->tanggal}}</td>
+                  <td>{{$data->denom}}</td>
+                  <td>{{$data->item}}</td>
+                  <td>{{$data->volume}}</td>
+                  <td>{{$data->feebased}}</td>
+                  <td>{{$data->kuadran}}</td>
                 </tr>
                 @endforeach
               </tbody>
@@ -91,7 +101,7 @@
         type: 'column'
     },
     title: {
-        text: 'ATM'
+        text: 'Transaksi ATM'
     },
     subtitle: {
         text: 'BANK MANDIRI'
@@ -115,7 +125,7 @@
     tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.f}</b></td></tr>',
+            '<td style="padding:0">Rp.<b>{point.y:,.0f}</b></td></tr>',
         footerFormat: '</table>',
         shared: true,
         useHTML: true
@@ -143,6 +153,12 @@
         data: {!!json_encode($total_type_center)!!}
 
     }]
+});
+
+Highcharts.setOptions({
+    lang: {
+        thousandsSep: ','
+    }
 });
 </script>
 @stop

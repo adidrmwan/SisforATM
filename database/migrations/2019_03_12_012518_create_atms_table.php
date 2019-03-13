@@ -20,7 +20,12 @@ class CreateAtmsTable extends Migration
             $table->string('vendor')->nullable();
             $table->string('area')->nullable();
             $table->string('tipe')->nullable();
-            $table->string('tanggal')->nullable();
+            $table->date('tanggal')->nullable();
+            $table->float('denom')->nullable();
+            $table->integer('item')->nullable();
+            $table->double('volume')->nullable();
+            $table->double('feebased')->nullable();
+            $table->string('kuadran')->nullable();
             $table->timestamps();
         });
     }

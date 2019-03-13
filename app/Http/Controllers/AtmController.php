@@ -24,7 +24,7 @@ class AtmController extends Controller
 
         $atmPooling = DB::table('atms')
                      ->select(
-                        DB::raw('count(*) as total_pooling'), 
+                        DB::raw('sum(denom) as total_pooling'), 
                         DB::raw("date_format(tanggal, '%M %Y') as months")
                      )
                      ->where('tipe', '=', 'Pooling ATM')
@@ -34,7 +34,7 @@ class AtmController extends Controller
 
         $atmDrive = DB::table('atms')
                      ->select(
-                        DB::raw('count(*) as total_drive'),
+                        DB::raw('sum(denom) as total_drive'),
                         DB::raw("date_format(tanggal, '%M %Y') as months")
                      )
                      ->where('tipe', '=', 'Drive Thru')
@@ -44,7 +44,7 @@ class AtmController extends Controller
 
         $atmSingle = DB::table('atms')
                      ->select(
-                        DB::raw('count(*) as total_single'),
+                        DB::raw('sum(denom) as total_single'),
                         DB::raw("date_format(tanggal, '%M %Y') as months")
                      )
                      ->where('tipe', '=', 'Single ATM')
@@ -54,7 +54,7 @@ class AtmController extends Controller
 
         $atmCenter = DB::table('atms')
                      ->select(
-                        DB::raw('count(*) as total_center'),
+                        DB::raw('sum(denom) as total_center'),
                         DB::raw("date_format(tanggal, '%M %Y') as months")
                      )
                      ->where('tipe', '=', 'ATM Center')
@@ -166,7 +166,9 @@ class AtmController extends Controller
             $path = $request->file('file')->getRealPath();
             $data = Excel::load($path, function($reader){})->get();
 
+
             if(!empty($data) && $data->count()) {
+                // dd($data);
                 foreach ($data as $key => $value) {
                     $atm = new Atm();
                     $atm->terminal_id = $value->terminal_id;
@@ -175,6 +177,11 @@ class AtmController extends Controller
                     $atm->area = $value->area;
                     $atm->tipe = $value->type_lokasi;
                     $atm->tanggal = $value->tanggal;
+                    $atm->denom = $value->denom;
+                    $atm->item = $value->item;
+                    $atm->volume = $value->volume;
+                    $atm->feebased = $value->feebased;
+                    $atm->kuadran = $value->kuadran;
                     $atm->save();
                 }
             }
